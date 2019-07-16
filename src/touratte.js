@@ -29,8 +29,11 @@ const getRandomText = () =>
 
 const getRandomInterval = (from, to) => Math.floor(Math.random() * to) + from;
 
+let stopEmmiting = false;
+
 const startEmmiter = eventTarget => () => {
   const renderer = document.getElementById('bottom');
+  stopEmmiting = false;
 
   setTimeout(fireEvent(eventTarget), getRandomInterval(1000, 5000));
 };
@@ -46,5 +49,7 @@ const fireEvent = subscriber => () => {
 
   const customEvent = new CustomEvent('shout', { detail, bubbles: true });
   subscriber.dispatchEvent(customEvent);
-  setTimeout(fireEvent(subscriber), getRandomInterval(1000, 5000));
+  if (!stopEmmiting) {
+    setTimeout(fireEvent(subscriber), getRandomInterval(1000, 5000));
+  }
 };

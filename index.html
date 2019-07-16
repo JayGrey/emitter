@@ -22,7 +22,7 @@
 </head>
 <body>
   <button id="startEmitButton">start emmiting</button>
-  <button>stop  emmiting</button>
+  <button id="stopEmitButton">stop  emmiting</button>
   <div id="root">
     <div id="total"></div>
     <div id="renderer"></div>
@@ -34,6 +34,7 @@
   const renderer = document.getElementById('renderer');
   renderer.addEventListener('shout', renderEvent);
   document.getElementById('startEmitButton').addEventListener('click', startEmmiter(renderer));
+  document.getElementById('stopEmitButton').addEventListener('click', () => {stopEmmiting = true;});
 </script>
 </body>
 </html>
