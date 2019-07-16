@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Practice</title>
+  <style>
+    .shout {
+      margin-top: 10px;
+      padding: 5px;
+      max-width: 200px;
+
+      border: 1px solid rgb(97, 181, 209);
+      border-radius: 5px;
+    }
+
+    .shout .author {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <button id="startEmitButton">start emmiting</button>
+  <button>stop  emmiting</button>
+  <div id="root">
+    <div id="total"></div>
+    <div id="renderer"></div>
+  </div>
+
+<script src="./touratte.js"></script>
+<script src="./renderer.js"></script>
+<script>
+  const renderer = document.getElementById('renderer');
+  renderer.addEventListener('shout', renderEvent);
+  document.getElementById('startEmitButton').addEventListener('click', startEmmiter(renderer));
+</script>
+</body>
+</html>
