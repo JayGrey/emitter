@@ -6,25 +6,53 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Practice</title>
   <style>
+    body {
+      padding: 10px;
+    }
+
     .shout {
       margin-top: 10px;
       padding: 5px;
       max-width: 200px;
 
-      border: 1px solid rgb(97, 181, 209);
+      border: 1px solid rgb(29, 123, 155);
       border-radius: 5px;
+      text-align: justify;
     }
 
     .shout .author {
       font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .highlighted {
+      border: 2px solid rgb(97, 181, 209);
+    }
+
+    .totalBlock {
+      position: fixed;
+      left: 250px;
+      
+    }
+
+    .totalBlock h4 {
+      margin: 0;
+      margin-bottom: 10px;
+    }
+
+    .hide {
+      display: none;
     }
   </style>
 </head>
 <body>
-  <button id="startEmitButton">start emmiting</button>
-  <button id="stopEmitButton">stop  emmiting</button>
+  <button id="startEmittButton">start emmiting</button>
+  <button id="stopEmittButton" class="hide">stop  emmiting</button>
   <div id="root">
-    <div id="total"></div>
+    <div class="totalBlock">
+      <h4>Shouts statistics:</h4>
+      <div id="total"></div>
+    </div>
     <div id="renderer"></div>
   </div>
 
@@ -32,9 +60,22 @@
 <script src="./src/renderer.js"></script>
 <script>
   const renderer = document.getElementById('renderer');
-  renderer.addEventListener('shout', renderEvent);
-  document.getElementById('startEmitButton').addEventListener('click', startEmmiter(renderer));
-  document.getElementById('stopEmitButton').addEventListener('click', () => {stopEmmiting = true;});
+  
+  document.getElementById('startEmittButton').addEventListener('click',() => {
+    renderer.addEventListener('shout', renderEvent);
+    startEmmiter(renderer);
+    
+    document.getElementById('startEmittButton').classList.add('hide');
+    document.getElementById('stopEmittButton').classList.remove('hide');
+  });
+
+  document.getElementById('stopEmittButton').addEventListener('click', () => {
+    renderer.removeEventListener('shout', renderEvent); 
+    stopEmmiting = true;
+    
+    document.getElementById('startEmittButton').classList.remove('hide');
+    document.getElementById('stopEmittButton').classList.add('hide');
+  });
 </script>
 </body>
 </html>

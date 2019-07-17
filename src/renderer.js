@@ -1,8 +1,3 @@
-// renderer.js should
-// 1. Listen to dispatched Event shout.
-// 2. Add to the page caught shout with author name and text.
-// 3. Add to the page the list of authors with the count of shouts.
-
 const createElement = (tagname, attributes, ...children) => {
   const element = document.createElement(tagname);
   children.forEach(child => element.appendChild(child));
@@ -15,15 +10,18 @@ const createElement = (tagname, attributes, ...children) => {
 let elements = 0;
 const parentElement = document.getElementById('renderer');
 
+const setWatcher = element => {
+  setTimeout(() => element.classList.remove('highlighted'), 1000);
+};
+
 const appendEvent = (parent, event) => {
-  // create element from event
   const element = createElement(
     'div',
-    { class: 'shout' },
+    { class: 'shout highlighted' },
     createElement(
       'div',
       { class: 'author' },
-      document.createTextNode(`#${event.detail.id} ${event.detail.author.name}`)
+      document.createTextNode(event.detail.author.name)
     ),
     createElement(
       'div',
@@ -32,14 +30,15 @@ const appendEvent = (parent, event) => {
     )
   );
 
-  // add first element
+  // keep only last 10 shouts
   parent.insertBefore(element, parent.firstChild);
   elements = elements > 10 ? elements : elements + 1;
 
-  // remove last element from parent
   if (elements > 10) {
     parent.removeChild(parent.lastChild);
   }
+
+  setWatcher(element);
 };
 
 const totals = {};
@@ -49,9 +48,9 @@ const updateTotals = event => {
   totals[author] = (totals[author] || 0) + 1;
 
   // delete all children from totals
-  while (totalsElement.firstChild) {
-    totalsElement.removeChild(totalsElement.firstChild);
-  }
+  [...totalsElement.childNodes].forEach(child =>
+    totalsElement.removeChild(child)
+  );
 
   // fill entries
   Object.entries(totals).forEach(entry => {
@@ -67,7 +66,6 @@ const updateTotals = event => {
 };
 
 const renderEvent = event => {
-  // console.log('cought event "shout" with data:', event.detail);
   appendEvent(parentElement, event);
   updateTotals(event);
 };
