@@ -17,9 +17,13 @@ const authorsList = [
   },
 ];
 
-let eventId = 0;
-
-const textslist = ['some text', 'other text', 'my very important opinion'];
+const textslist = [
+  'Joe was playing football. He hurt his knee.',
+  'I wasn`t able to speak the local language. So I had trouble communicating.',
+  'We had spent nearly all our money. So we couldn`t afford to stay at a hotel.',
+  'We use still to say that a situation or action is continuing. lt hasn`t changed or stopped.',
+  'These pictures are really awful. Even I take better pictures than these.',
+];
 
 const getRandomAuthor = () =>
   authorsList[Math.floor(Math.random() * authorsList.length)];
@@ -31,7 +35,7 @@ const getRandomInterval = (from, to) => Math.floor(Math.random() * to) + from;
 
 let stopEmmiting = false;
 
-const startEmmiter = eventTarget => () => {
+const startEmmiter = eventTarget => {
   const renderer = document.getElementById('bottom');
   stopEmmiting = false;
 
@@ -42,7 +46,6 @@ const fireEvent = subscriber => () => {
   const detail = {
     author: getRandomAuthor(),
     text: getRandomText(),
-    id: ++eventId,
   };
 
   console.log('emit event "shout" with data:', detail);
