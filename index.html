@@ -6,6 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Practice</title>
   <style>
+    body {
+      padding: 10px;
+    }
+
     .shout {
       margin-top: 10px;
       padding: 5px;
@@ -24,13 +28,27 @@
     .highlighted {
       border: 2px solid rgb(97, 181, 209);
     }
+
+    .totalBlock {
+      position: fixed;
+      left: 250px;
+      
+    }
+
+    .totalBlock h4 {
+      margin: 0;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
   <button id="startEmitButton">start emmiting</button>
   <button id="stopEmitButton">stop  emmiting</button>
   <div id="root">
-    <div id="total"></div>
+    <div class="totalBlock">
+      <h4>Shouts statistics:</h4>
+      <div id="total"></div>
+    </div>
     <div id="renderer"></div>
   </div>
 
