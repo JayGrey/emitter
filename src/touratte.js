@@ -1,7 +1,3 @@
-// touratte.js should
-// 1. Create CustomEvent with name shout and detail with the random author (from authorsList) and randomly generated text.
-// 2. The script will dispatch the event on a random interval (1-5 seconds)
-
 const authorsList = [
   {
     _id: 1,
@@ -17,21 +13,20 @@ const authorsList = [
   },
 ];
 
-const textslist = [
-  'Joe was playing football. He hurt his knee.',
+const textsList = [
   'I wasn`t able to speak the local language. So I had trouble communicating.',
-  'We had spent nearly all our money. So we couldn`t afford to stay at a hotel.',
+  'She had spent nearly all our money. So we couldn`t afford to stay at a hotel.',
   'We use still to say that a situation or action is continuing. lt hasn`t changed or stopped.',
+  'I used to be an adventurer like you. Then I took an arrow in the knee.',
   'These pictures are really awful. Even I take better pictures than these.',
 ];
 
-const getRandomAuthor = () =>
-  authorsList[Math.floor(Math.random() * authorsList.length)];
-
-const getRandomText = () =>
-  textslist[Math.floor(Math.random() * textslist.length)];
-
 const getRandomInterval = (from, to) => Math.floor(Math.random() * to) + from;
+
+const getRandomAuthor = () =>
+  authorsList[getRandomInterval(0, authorsList.length)];
+
+const getRandomText = () => textsList[getRandomInterval(0, textsList.length)];
 
 let stopEmmiting = false;
 
@@ -48,7 +43,7 @@ const fireEvent = subscriber => () => {
     text: getRandomText(),
   };
 
-  console.log('emit event "shout" with data:', detail);
+  console.log('emitt event "shout" with data:', detail);
 
   const customEvent = new CustomEvent('shout', { detail, bubbles: true });
   subscriber.dispatchEvent(customEvent);

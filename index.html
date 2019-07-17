@@ -39,11 +39,15 @@
       margin: 0;
       margin-bottom: 10px;
     }
+
+    .hide {
+      display: none;
+    }
   </style>
 </head>
 <body>
-  <button id="startEmitButton">start emmiting</button>
-  <button id="stopEmitButton">stop  emmiting</button>
+  <button id="startEmittButton">start emmiting</button>
+  <button id="stopEmittButton" class="hide">stop  emmiting</button>
   <div id="root">
     <div class="totalBlock">
       <h4>Shouts statistics:</h4>
@@ -57,14 +61,20 @@
 <script>
   const renderer = document.getElementById('renderer');
   
-  document.getElementById('startEmitButton').addEventListener('click',() => {
-  renderer.addEventListener('shout', renderEvent);
+  document.getElementById('startEmittButton').addEventListener('click',() => {
+    renderer.addEventListener('shout', renderEvent);
     startEmmiter(renderer);
+    
+    document.getElementById('startEmittButton').classList.add('hide');
+    document.getElementById('stopEmittButton').classList.remove('hide');
   });
 
-  document.getElementById('stopEmitButton').addEventListener('click', () => {
+  document.getElementById('stopEmittButton').addEventListener('click', () => {
     renderer.removeEventListener('shout', renderEvent); 
     stopEmmiting = true;
+    
+    document.getElementById('startEmittButton').classList.remove('hide');
+    document.getElementById('stopEmittButton').classList.add('hide');
   });
 </script>
 </body>

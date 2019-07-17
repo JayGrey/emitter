@@ -1,8 +1,3 @@
-// renderer.js should
-// 1. Listen to dispatched Event shout.
-// 2. Add to the page caught shout with author name and text.
-// 3. Add to the page the list of authors with the count of shouts.
-
 const createElement = (tagname, attributes, ...children) => {
   const element = document.createElement(tagname);
   children.forEach(child => element.appendChild(child));
